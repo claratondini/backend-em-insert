@@ -1,0 +1,187 @@
+# Evidências — Partes 1 e 2
+ 
+## Identificação
+ 
+Nome do aluno: Clara Tondini
+Turma: 3 ano B
+Data: 15/05/2026
+ 
+---
+ 
+## 1. Link do meu repositório GitHub
+ 
+Cole abaixo o link do seu repositório:
+ 
+https://github.com/claratondini/backend-em-insert
+ 
+---
+ 
+# Parte 1 — Clonagem, configuração e publicação
+ 
+## 2. Comprovação do remote configurado
+ 
+Execute no terminal:
+ 
+git remote -v
+ 
+Cole abaixo o resultado:
+origin  https://github.com/claratondini/backend-em-insert.git (fetch)
+origin  https://github.com/claratondini/backend-em-insert.git (push)
+ 
+cole aqui o resultado do comando
+ 
+---
+ 
+## 3. Comprovação dos commits
+ 
+Execute no terminal:
+ 
+git log --oneline
+
+9a20a08 (HEAD -> main, origin/main) Atualiza rota raiz com pesquisa por data
+ce10749 Configura projeto insert
+4ffe899 Rename project section from 'Parte 2' to 'Insert'
+ea330b7 Inserção de 3 registros de leituras
+dba6585 Filtra Leituras por data
+ba38040 Update DB_PASSWORD in .env-exemplo
+3a9d2b0 Commit inicial
+ 
+Cole abaixo o resultado:
+ 
+cole aqui o resultado do comando
+ 
+O resultado deve mostrar commits como:
+ 
+Configura projeto insert
+Atualiza rota raiz com pesquisa por data
+ 
+---
+ 
+## 4. Comprovação do status do projeto
+ 
+Execute no terminal:
+ 
+git status
+ 
+Cole abaixo o resultado:
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   evidencias.md
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   evidencias.md
+ 
+cole aqui o resultado do comando
+ 
+---
+ 
+## 5. Comprovação da execução do projeto
+ 
+Execute no terminal:
+ 
+npm run dev
+ 
+Cole abaixo a mensagem exibida no terminal:
+> backend-em-parte-2@1.0.0 dev
+> nodemon src/server.js
+
+[nodemon] 3.1.14
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `node src/server.js`
+Banco db_em já existe.
+Conexão com PostgreSQL realizada com sucesso.
+Tabela sincronizada com sucesso.
+Tabela leituras já possui dados.
+Servidor rodando em http://localhost:3000
+ 
+cole aqui o resultado do terminal
+ 
+---
+ 
+## 6. Teste da rota de todas as leituras
+ 
+Acesse no navegador:
+ 
+http://localhost:3000/api/leituras
+ 
+Cole abaixo parte do resultado exibido:
+{"mensagem":"API Estação Meteorológica","descricao":"API para consulta de leituras meteorológicas armazenadas no PostgreSQL.","rotasDisponiveis":{"listarTodasAsLeituras":"GET /api/leituras","pesquisarLeiturasPorData":"GET /api/leituras/data/2026-04-01"},"formatoDaData":"YYYY-MM-DD","exemploDeUso":"http://localhost:3000/api/leituras/data/2026-04-01"}
+ 
+cole aqui parte do resultado da rota /api/leituras
+ 
+---
+ 
+# Parte 2 — Alteração da rota raiz e pesquisa por data
+ 
+## 7. Comprovação da rota raiz alterada
+ 
+Acesse no navegador:
+ 
+http://localhost:3000/
+ 
+Cole abaixo o resultado exibido: {"mensagem":"API Estação Meteorológica","descricao":"API para consulta de leituras meteorológicas armazenadas no PostgreSQL.","rotasDisponiveis":{"listarTodasAsLeituras":"GET /api/leituras","pesquisarLeiturasPorData":"GET /api/leituras/data/2026-04-01"},"formatoDaData":"YYYY-MM-DD","exemploDeUso":"http://localhost:3000/api/leituras/data/2026-04-01"}
+ 
+cole aqui o resultado da rota /
+ 
+O resultado deve mostrar as rotas disponíveis, incluindo:
+ 
+GET /api/leituras
+GET /api/leituras/data/2026-04-01
+ 
+---
+ 
+## 8. Teste da rota de pesquisa por data
+ 
+Acesse no navegador:
+ 
+http://localhost:3000/api/leituras/data/2026-04-01
+ 
+Cole abaixo parte do resultado exibido:
+{"mensagem":"API Estação Meteorológica","descricao":"API para consulta de leituras meteorológicas armazenadas no PostgreSQL.","rotasDisponiveis":{"listarTodasAsLeituras":"GET /api/leituras","pesquisarLeiturasPorData":"GET /api/leituras/data/2026-04-01"},"formatoDaData":"YYYY-MM-DD","exemploDeUso":"http://localhost:3000/api/leituras/data/2026-04-01"}
+ 
+cole aqui parte do resultado da rota /api/leituras/data/2026-04-01
+ 
+---
+ 
+## 9. Teste de data inválida
+ 
+Acesse no navegador:
+ 
+http://localhost:3000/api/leituras/data/01-04-2026
+ 
+Cole abaixo o resultado exibido:
+
+{"mensagem":"API Estação Meteorológica","descricao":"API para consulta de leituras meteorológicas armazenadas no PostgreSQL.","rotasDisponiveis":{"listarTodasAsLeituras":"GET /api/leituras","pesquisarLeiturasPorData":"GET /api/leituras/data/2026-04-01"},"formatoDaData":"YYYY-MM-DD","exemploDeUso":"http://localhost:3000/api/leituras/data/2026-04-01"}
+ 
+cole aqui o resultado da validação de data inválida
+ 
+---
+ 
+## 10. Código alterado na rota raiz
+ 
+Cole abaixo o trecho da rota raiz alterada no arquivo src/server.js:
+app.get('/', (req, res) => {
+  return res.json({
+    mensagem: 'API Estação Meteorológica',
+    descricao: 'API para consulta de leituras meteorológicas armazenadas no PostgreSQL.',
+    rotasDisponiveis: {
+      listarTodasAsLeituras: 'GET /api/leituras',
+      pesquisarLeiturasPorData: 'GET /api/leituras/data/2026-04-01',
+    },
+    formatoDaData: 'YYYY-MM-DD',
+    exemploDeUso: 'http://localhost:3000/api/leituras/data/2026-04-01',
+  });
+});
+ 
+cole aqui o código da rota app.get('/')
+ 
+---
+ 
+## 11. Observação final
+ Consegui clonar, configurar, executar, testar, alterar a rota raiz, testar a pesquisa por data e publicar o projeto no meu GitHub.
